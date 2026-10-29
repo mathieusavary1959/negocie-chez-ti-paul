@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Correction - Négocie ! Chez Ti-Paul</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--nuit:#0A0A0E;--neon:#FF5A1F;--neon-jaune:#FFC93C;--creme:#F5EFE0;--doux:#a8a29a;--acte:#FFB020}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--nuit);color:#fff;font-family:'Work Sans',sans-serif;overflow-y:auto;position:relative;min-height:100vh}
+.bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em}
+.fond{position:fixed;inset:0;z-index:0;pointer-events:none}
+.lueur{position:absolute;top:-22vh;left:50%;transform:translateX(-50%);width:95vw;height:65vh;background:radial-gradient(ellipse at center,rgba(255,90,31,.16),transparent 65%)}
+.lueur-vitrine{position:absolute;bottom:-30vh;left:50%;transform:translateX(-50%);width:110vw;height:55vh;background:radial-gradient(ellipse at center,rgba(255,170,60,.10),transparent 60%)}
+.briques{position:absolute;inset:0;opacity:.05;background-image:repeating-linear-gradient(0deg,transparent,transparent 34px,rgba(255,255,255,.5) 35px),repeating-linear-gradient(90deg,transparent,transparent 74px,rgba(255,255,255,.5) 75px)}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.82))}
+.grain{position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+.neon{color:#fff}
+.neon.rouge{text-shadow:0 0 6px #fff,0 0 20px var(--neon),0 0 55px var(--neon),0 0 110px var(--neon)}
+.neon.jaune{text-shadow:0 0 6px #fff,0 0 18px var(--neon-jaune),0 0 45px var(--neon-jaune),0 0 90px rgba(255,201,60,.7)}
+.flick-doux{animation:flick 5.3s infinite}
+@keyframes flick{0%,100%{opacity:1}88%{opacity:1}89%{opacity:.3}90%{opacity:1}93%{opacity:.5}94%{opacity:1}}
+.contenu{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:34px 20px 60px}
+.titre{font-size:clamp(46px,7vw,92px);line-height:1;text-align:center}
+.sous{text-align:center;color:var(--doux);margin:10px 0 6px;font-size:17px}
+.onglets{display:flex;gap:10px;margin:26px 0 22px;flex-wrap:wrap;justify-content:center}
+.onglet{background:#131318;color:#ffb08a;border:2px solid #3a3a42;border-radius:12px;padding:10px 26px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;cursor:pointer;transition:all .2s}
+.onglet:hover{border-color:var(--neon);transform:translateY(-2px)}
+.onglet.actif{background:var(--neon);color:#160806;border-color:var(--neon);box-shadow:0 0 24px rgba(255,90,31,.55)}
+.onglet .nb{font-size:14px;opacity:.75;font-family:'Work Sans',sans-serif}
+.carte{background:#131318;border:1px solid #2b2b32;border-radius:14px;padding:22px;margin-bottom:20px;box-shadow:0 14px 34px rgba(0,0,0,.55)}
+.carte h2{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.05em;margin-bottom:12px}
+.carte h2 .grp{color:var(--neon-jaune);font-size:22px}
+.carte h3{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.05em;margin:6px 0 10px}
+label{font-weight:bold;display:block;margin:12px 0 5px;color:var(--creme)}
+input[type=text],select{font-size:18px;padding:10px 12px;border:2px solid #3a3a42;border-radius:10px;background:#0e0e13;color:#fff;width:100%;max-width:440px;font-family:'Work Sans',sans-serif}
+input:focus,select:focus{outline:none;border-color:var(--neon);box-shadow:0 0 14px rgba(255,90,31,.35)}
+input.lettres{font-family:monospace;letter-spacing:4px;text-transform:uppercase}
+select option{background:#131318}
+.btn{background:var(--neon);color:#160806;border:none;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;padding:12px 40px;border-radius:12px;cursor:pointer;box-shadow:0 0 30px rgba(255,90,31,.45);margin-top:14px;transition:transform .15s}
+.btn:hover{transform:scale(1.04)}
+.btn.danger{background:transparent;color:#ff7b7b;border:2px solid #c0392b;font-size:15px;padding:4px 14px;box-shadow:none;border-radius:8px;margin-top:0}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px}
+th,td{border:1px solid #2e2e35;padding:8px;text-align:left}
+th{background:#0e0e13;color:var(--neon-jaune);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.05em}
+td{color:#e8e4da}
+.total{font-weight:bold;font-size:19px;color:#fff}
+.erreur{color:#ff7b7b;font-weight:bold;margin-top:10px}
+.ok{color:#7ddf8e;font-weight:bold;margin-top:10px}
+.classement{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:700px){.classement{grid-template-columns:1fr}}
+.classement p{margin:8px 0;color:#e8e4da}
+.puce{display:inline-block;min-width:30px;text-align:center;background:var(--neon);color:#160806;border-radius:6px;padding:2px 8px;margin-right:8px;font-weight:bold}
+input.ajust{width:64px;font-size:16px;padding:4px 6px;background:#0e0e13;color:#fff;border:2px solid #3a3a42;border-radius:6px;text-align:center}
+details{margin-top:8px}
+summary{cursor:pointer;font-weight:bold;font-size:16px;color:var(--neon-jaune)}
+.eclairage{background:#141410;border-left:4px solid var(--neon-jaune);padding:10px 14px;margin:8px 0;font-size:14px;color:#e8e4da;border-radius:0 8px 8px 0}
+.note-echelle{font-size:13px;color:var(--doux);margin-top:10px}
+.choix-mono{font-family:monospace;letter-spacing:2px}
+#verrou{position:fixed;inset:0;z-index:999;background:#0A0A0E;display:flex;align-items:center;justify-content:center;padding:20px}
+#verrou .boite{text-align:center;max-width:420px;width:100%;border:2px solid #FF5A1F;border-radius:16px;padding:34px 28px;background:#121218;box-shadow:0 0 42px rgba(255,90,31,.35)}
+#verrou h2{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:.06em;color:#FFC93C;margin:0 0 6px}
+#verrou p{color:#C9CEDA;font-size:14.5px;margin:0 0 18px}
+#verrou input{width:170px;text-align:center;font-size:22px;letter-spacing:.35em;padding:10px 8px;border-radius:10px;border:2px solid #35312A;background:#0A0A0E;color:#F5F2EA}
+#verrou button{display:block;margin:16px auto 0;background:#FF5A1F;color:#fff;border:none;border-radius:999px;padding:11px 30px;font-family:"Bebas Neue",sans-serif;font-size:19px;letter-spacing:.08em;cursor:pointer}
+#verrou button:hover{opacity:.9}
+#verrou .err{color:#FF5A4E;font-size:13.5px;min-height:18px;margin-top:10px}
+body.verrouille>.fond,body.verrouille>.contenu{display:none}
+@media print{.saisie,.onglets,.btn{display:none}body{background:#fff;color:#111}.carte{background:#fff;border-color:#ccc}.carte h2{color:#111}td{color:#111}.total{color:#111}}
+</style>
+</head>
+<body class="verrouille">
+<div id="verrou">
+  <div class="boite">
+    <h2>ESPACE ENSEIGNANT</h2>
+    <p>Outil de correction de N&eacute;gocie ! Chez Ti-Paul.<br>Entrez le code pour ouvrir.</p>
+    <input type="password" id="codeVerrou" inputmode="numeric" autocomplete="off" aria-label="Code enseignant">
+    <button id="btnVerrou" type="button">Ouvrir</button>
+    <div class="err" id="errVerrou"></div>
+  </div>
+</div>
+<script>
+(function(){
+  function deverrouiller(){
+    document.body.classList.remove("verrouille");
+    var v = document.getElementById("verrou");
+    if (v) { v.style.display = "none"; }
+  }
+  if (sessionStorage.getItem("tipaul_corr_ok") === "1") { deverrouiller(); return; }
+  function essayer(){
+    var code = document.getElementById("codeVerrou").value.trim();
+    if (code === "1959") {
+      sessionStorage.setItem("tipaul_corr_ok", "1");
+      deverrouiller();
+    } else {
+      document.getElementById("errVerrou").textContent = "Code incorrect. Réessayez.";
+      document.getElementById("codeVerrou").value = "";
+      document.getElementById("codeVerrou").focus();
+    }
+  }
+  document.getElementById("btnVerrou").addEventListener("click", essayer);
+  document.getElementById("codeVerrou").addEventListener("keydown", function(e){ if (e.key === "Enter") { essayer(); } });
+  document.getElementById("codeVerrou").focus();
+})();
+</script>
+<div class="fond"><div class="lueur"></div><div class="lueur-vitrine"></div><div class="briques"></div><div class="vignette"></div><div class="grain"></div></div>
+
+<div class="contenu">
+  <h1 class="bebas neon rouge flick-doux titre">CORRECTION &mdash; CHEZ TI-PAUL</h1>
+  <p class="sous">Entrez les 18 lettres de chaque feuille de pointage. Le calcul se fait tout seul.</p>
+
+  <div class="onglets" id="onglets"></div>
+
+  <div class="carte saisie">
+    <label>Nom de la table</label>
+    <input type="text" id="nom" placeholder="Ex. Table 3">
+    <label>C&ocirc;t&eacute;</label>
+    <select id="cote"><option value="syndicat">Syndicat</option><option value="employeur">Employeur</option></select>
+    <label>Les 18 choix (lettres A &agrave; E, dans l'ordre des clauses)</label>
+    <input type="text" id="lettres" class="lettres" maxlength="18" placeholder="Ex. CBDAECBDAECBDAECBDA">
+    <div><button class="btn" onclick="ajouter()">Ajouter la table</button></div>
+    <div id="msg"></div>
+  </div>
+
+  <div class="carte">
+    <h2>Tables saisies <span class="grp" id="titreGrp"></span></h2>
+    <div id="liste"></div>
+  </div>
+
+  <div class="carte">
+    <h2>Classement <span class="grp" id="titreGrp2"></span></h2>
+    <div class="classement">
+      <div><h3 class="neon rouge">La brigade</h3><div id="rankS"></div></div>
+      <div><h3 class="neon jaune">La direction</h3><div id="rankE"></div></div>
+    </div>
+  </div>
+
+  <div class="carte">
+    <h2>Corrig&eacute; (pour le d&eacute;brief)</h2>
+    <details><summary>Afficher le choix l&eacute;gal de chaque clause</summary><div id="corrige"></div></details>
+  </div>
+</div>
+
+<script>
+const DATA = {"scoring": [{"titre": "Salaire horaire de base", "pts": {"A": {"ps": 4, "pe": 3}, "B": {"ps": -5, "pe": -5}, "C": {"ps": 2, "pe": 5}, "D": {"ps": 5, "pe": 2}, "E": {"ps": 3, "pe": 4}}}, {"titre": "Primes de quart", "pts": {"A": {"ps": 3, "pe": 4}, "B": {"ps": 4, "pe": 3}, "C": {"ps": 6, "pe": 1}, "D": {"ps": 5, "pe": 2}, "E": {"ps": 2, "pe": 5}}}, {"titre": "Partage des pourboires", "pts": {"A": {"ps": 5, "pe": 2}, "B": {"ps": -5, "pe": -5}, "C": {"ps": 3, "pe": 4}, "D": {"ps": 2, "pe": 5}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Augmentation annuelle", "pts": {"A": {"ps": 4, "pe": 3}, "B": {"ps": 6, "pe": 1}, "C": {"ps": 3, "pe": 4}, "D": {"ps": 5, "pe": 2}, "E": {"ps": 2, "pe": 5}}}, {"titre": "Prime d'ancienneté", "pts": {"A": {"ps": 2, "pe": 5}, "B": {"ps": 5, "pe": 2}, "C": {"ps": 3, "pe": 4}, "D": {"ps": 6, "pe": 1}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Affichage des horaires", "pts": {"A": {"ps": 4, "pe": 3}, "B": {"ps": -5, "pe": -5}, "C": {"ps": 5, "pe": 2}, "D": {"ps": 2, "pe": 5}, "E": {"ps": 3, "pe": 4}}}, {"titre": "Quarts coupés", "pts": {"A": {"ps": 3, "pe": 4}, "B": {"ps": 2, "pe": 5}, "C": {"ps": -5, "pe": -5}, "D": {"ps": 5, "pe": 2}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Indemnité de présence", "pts": {"A": {"ps": 2, "pe": 5}, "B": {"ps": 5, "pe": 2}, "C": {"ps": 3, "pe": 4}, "D": {"ps": -5, "pe": -5}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Heures supplémentaires", "pts": {"A": {"ps": 3, "pe": 4}, "B": {"ps": 2, "pe": 5}, "C": {"ps": 5, "pe": 2}, "D": {"ps": -5, "pe": -5}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Pauses et repas", "pts": {"A": {"ps": -5, "pe": -5}, "B": {"ps": 4, "pe": 3}, "C": {"ps": 5, "pe": 2}, "D": {"ps": 2, "pe": 5}, "E": {"ps": 3, "pe": 4}}}, {"titre": "Vacances annuelles", "pts": {"A": {"ps": 4, "pe": 3}, "B": {"ps": -5, "pe": -5}, "C": {"ps": 2, "pe": 5}, "D": {"ps": 3, "pe": 4}, "E": {"ps": 5, "pe": 2}}}, {"titre": "Congés de maladie", "pts": {"A": {"ps": 3, "pe": 4}, "B": {"ps": 5, "pe": 2}, "C": {"ps": -5, "pe": -5}, "D": {"ps": 2, "pe": 5}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Jours fériés", "pts": {"A": {"ps": 5, "pe": 2}, "B": {"ps": 4, "pe": 3}, "C": {"ps": 3, "pe": 4}, "D": {"ps": -5, "pe": -5}, "E": {"ps": 2, "pe": 5}}}, {"titre": "Assurance collective", "pts": {"A": {"ps": 2, "pe": 5}, "B": {"ps": 4, "pe": 3}, "C": {"ps": 3, "pe": 4}, "D": {"ps": 6, "pe": 1}, "E": {"ps": 5, "pe": 2}}}, {"titre": "Repas et rabais", "pts": {"A": {"ps": 2, "pe": 5}, "B": {"ps": 5, "pe": 2}, "C": {"ps": 3, "pe": 4}, "D": {"ps": 6, "pe": 1}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Régime de retraite", "pts": {"A": {"ps": 3, "pe": 4}, "B": {"ps": 5, "pe": 2}, "C": {"ps": 6, "pe": 1}, "D": {"ps": 2, "pe": 5}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Mise à pied et préavis", "pts": {"A": {"ps": 3, "pe": 4}, "B": {"ps": -5, "pe": -5}, "C": {"ps": 2, "pe": 5}, "D": {"ps": 5, "pe": 2}, "E": {"ps": 4, "pe": 3}}}, {"titre": "Période d'essai", "pts": {"A": {"ps": 4, "pe": 3}, "B": {"ps": 2, "pe": 5}, "C": {"ps": -5, "pe": -5}, "D": {"ps": 5, "pe": 2}, "E": {"ps": 3, "pe": 4}}}], "corrige": [{"titre": "Salaire horaire de base", "legal": "C", "eclairage": "Le salaire minimum au Québec est de 16,60 $/h depuis le 1er mai 2026. En bas de ça, c'est illégal."}, {"titre": "Primes de quart", "legal": "E", "eclairage": "La loi ne prévoit aucune prime de quart. C'est une pure matière de négociation."}, {"titre": "Partage des pourboires", "legal": "D", "eclairage": "Article 50 : le pourboire appartient au salarié. L'employeur ne peut rien prélever ni imposer le partage. Seuls les employés peuvent convenir d'un partage, à la majorité."}, {"titre": "Augmentation annuelle", "legal": "E", "eclairage": "La loi n'oblige aucune augmentation annuelle. L'employeur doit seulement respecter le salaire minimum."}, {"titre": "Prime d'ancienneté", "legal": "A", "eclairage": "Aucune obligation légale. La prime d'ancienneté se négocie."}, {"titre": "Affichage des horaires", "legal": "D", "eclairage": "Article 59.0.1 : le salarié peut refuser de travailler s'il n'a pas été informé au moins 5 jours à l'avance. Lui enlever ce droit est illégal."}, {"titre": "Quarts coupés", "legal": "B", "eclairage": "Les quarts coupés sont permis par la loi, avec une limite de 12 h de travail par 24 h. Au-delà, c'est illégal."}, {"titre": "Indemnité de présence", "legal": "A", "eclairage": "Article 58 : le salarié qui se présente et travaille moins de 3 h consécutives reçoit une indemnité de 3 h à son salaire habituel, pourboires inclus."}, {"titre": "Heures supplémentaires", "legal": "B", "eclairage": "Seuil de 40 h par semaine, taux majoré de 1,5 fois. En bas de ça, c'est illégal."}, {"titre": "Pauses et repas", "legal": "D", "eclairage": "Article 79 : pause-repas de 30 minutes non payée obligatoire après 5 h consécutives (payée si le salarié doit rester à son poste). Les pauses café ne sont pas obligatoires."}, {"titre": "Vacances annuelles", "legal": "C", "eclairage": "2 semaines et 4 % d'indemnité après 1 an, 3 semaines et 6 % après 3 ans de service. Refuser la 3e semaine est illégal."}, {"titre": "Congés de maladie", "legal": "D", "eclairage": "Article 79.16 : 2 jours payés par année pour maladie ou obligations familiales (après 3 mois de service continu)."}, {"titre": "Jours fériés", "legal": "E", "eclairage": "8 jours fériés chômés et payés au Québec, indemnité de 1/20 du salaire des 4 semaines précédentes. En bas de 8, c'est illégal."}, {"titre": "Assurance collective", "legal": "A", "eclairage": "Aucune obligation légale d'offrir une assurance collective. C'est une matière de négociation."}, {"titre": "Repas et rabais", "legal": "A", "eclairage": "Aucune obligation légale. Et un repas ne peut jamais remplacer une partie du salaire minimum."}, {"titre": "Régime de retraite", "legal": "D", "eclairage": "Aucune obligation légale de régime de retraite ou de REER collectif."}, {"titre": "Mise à pied et préavis", "legal": "C", "eclairage": "Article 82 : préavis écrit de 1, 2, 4 ou 8 semaines selon l'ancienneté pour une mise à pied de 6 mois et plus. Le rappel selon l'ancienneté, lui, se négocie."}, {"titre": "Période d'essai", "legal": "B", "eclairage": "La loi ne prévoit pas de période d'essai formelle. Le seuil pratique est 3 mois : en deçà, aucun préavis de fin d'emploi n'est requis."}]};
+
+const GROUPES = ['502','505','507','508'];
+let groupeActif = '502';
+let tables = [];
+
+function cle(){ return 'tipaul_tables_' + groupeActif; }
+function charger(){ tables = JSON.parse(localStorage.getItem(cle())||'[]'); }
+function sauver(){ localStorage.setItem(cle(), JSON.stringify(tables)); }
+
+function changerGroupe(g){
+  groupeActif = g;
+  charger();
+  document.getElementById('msg').innerHTML='';
+  construireOnglets();
+  afficher();
+}
+function construireOnglets(){
+  const cont = document.getElementById('onglets');
+  cont.innerHTML = GROUPES.map(function(g){
+    const nb = JSON.parse(localStorage.getItem('tipaul_tables_'+g)||'[]').length;
+    return '<button class="onglet'+(g===groupeActif?' actif':'')+'" onclick="changerGroupe(\''+g+'\')">Groupe '+g+' <span class="nb">('+nb+')</span></button>';
+  }).join('');
+}
+
+function ptsPour(clauseIdx, lettre, cote){
+  const p = DATA.scoring[clauseIdx].pts[lettre];
+  return cote==='syndicat' ? p.ps : p.pe;
+}
+function ajouter(){
+  const nom = document.getElementById('nom').value.trim();
+  const cote = document.getElementById('cote').value;
+  const lettres = document.getElementById('lettres').value.trim().toUpperCase();
+  const msg = document.getElementById('msg');
+  if(!nom){msg.innerHTML='<div class="erreur">Indiquez le nom de la table.</div>';return;}
+  if(!/^[A-E]{18}$/.test(lettres)){msg.innerHTML='<div class="erreur">Il faut exactement 18 lettres de A à E.</div>';return;}
+  let total = 0, detail = [];
+  for(let i=0;i<18;i++){const p = ptsPour(i, lettres[i], cote); total += p; detail.push(p);}
+  tables.push({nom, cote, lettres, total, detail, ajust: 0});
+  sauver();
+  document.getElementById('nom').value=''; document.getElementById('lettres').value='';
+  msg.innerHTML='<div class="ok">Table ajoutée : '+total+' points.</div>';
+  construireOnglets();
+  afficher();
+}
+function supprimer(i){tables.splice(i,1);sauver();construireOnglets();afficher();}
+function majAjust(i,val){
+  tables[i].ajust = parseInt(val)||0;
+  sauver();
+  construireOnglets();
+  afficher();
+}
+function totalAjuste(t){ return t.total + (t.ajust||0); }
+function noteFinale(t){
+  const max = t.cote==='syndicat' ? 93 : 90;
+  const pct = totalAjuste(t)/max;
+  if(pct>=0.9) return 100;
+  if(pct>=0.8) return 90;
+  if(pct>=0.7) return 85;
+  if(pct>=0.6) return 80;
+  if(pct>=0.5) return 75;
+  if(pct>=0.4) return 70;
+  if(pct>=0.3) return 65;
+  return 60;
+}
+function afficher(){
+  document.getElementById('titreGrp').textContent = '· Groupe ' + groupeActif;
+  document.getElementById('titreGrp2').textContent = '· Groupe ' + groupeActif;
+  const liste = document.getElementById('liste');
+  if(!tables.length){liste.innerHTML='<p style="color:var(--doux)">Aucune table saisie pour ce groupe.</p>';}
+  else{
+    let h = '<table><tr><th>Table</th><th>Côté</th><th>Choix</th><th>Pts</th><th>Ajust.</th><th>Total</th><th>Note</th><th></th></tr>';
+    tables.forEach((t,i)=>{
+      const ta = totalAjuste(t);
+      h += '<tr><td>'+t.nom+'</td><td>'+t.cote+'</td><td class="choix-mono">'+t.lettres+'</td><td>'+t.total+'</td>'
+        + '<td><input type="number" class="ajust" value="'+(t.ajust||0)+'" onchange="majAjust('+i+',this.value)"></td>'
+        + '<td class="total">'+ta+'</td><td class="total">'+noteFinale(t)+' %</td>'
+        + '<td><button class="btn danger" onclick="supprimer('+i+')">X</button></td></tr>';
+    });
+    liste.innerHTML = h+'</table>'
+      + '<p class="note-echelle">Échelle (en % du max du camp : 93 syndicat, 90 employeur) : 90 %+ = 100 %, 80 % = 90 %, 70 % = 85 %, 60 % = 80 %, 50 % = 75 %, 40 % = 70 %, 30 % = 65 %, en dessous = 60 % plancher.</p>';
+  }
+  const rs = tables.filter(t=>t.cote==='syndicat').sort((a,b)=>totalAjuste(b)-totalAjuste(a));
+  const re = tables.filter(t=>t.cote==='employeur').sort((a,b)=>totalAjuste(b)-totalAjuste(a));
+  document.getElementById('rankS').innerHTML = rs.length ? rs.map((t,i)=>'<p><span class="puce">'+(i+1)+'</span>'+t.nom+' : <b>'+totalAjuste(t)+'</b> pts, <b>'+noteFinale(t)+' %</b></p>').join('') : '<p style="color:var(--doux)">Aucun.</p>';
+  document.getElementById('rankE').innerHTML = re.length ? re.map((t,i)=>'<p><span class="puce">'+(i+1)+'</span>'+t.nom+' : <b>'+totalAjuste(t)+'</b> pts, <b>'+noteFinale(t)+' %</b></p>').join('') : '<p style="color:var(--doux)">Aucun.</p>';
+  document.getElementById('corrige').innerHTML = DATA.corrige.map((c,i)=>'<p><b>'+(i+1)+'. '+c.titre+'</b> : choix <b>'+c.legal+'</b></p><div class="eclairage">'+c.eclairage+'</div>').join('');
+}
+construireOnglets();
+charger();
+afficher();
+</script>
+</body>
+</html>
